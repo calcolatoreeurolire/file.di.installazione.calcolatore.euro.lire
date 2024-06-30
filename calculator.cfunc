@@ -1,0 +1,71 @@
+Import to <github.com>
+WEBSITE: calcolatoreeurolire.github.io/index.html
+function setTheme(theme) {
+            document.body.className = theme;
+        }
+
+        function showCalculator(calculatorId) {
+            const calculators = document.querySelectorAll('.calculator');
+            calculators.forEach(calculator => {
+                if (calculator.id === calculatorId) {
+                    calculator.classList.add('active');
+                } else {
+                    calculator.classList.remove('active');
+                }
+            });
+
+            const buttons = document.querySelectorAll('.menu button');
+            buttons.forEach(button => {
+                if (button.id === calculatorId + 'Btn') {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function convertEuroToLire() {
+            const euroAmount = parseFloat(document.getElementById('euroAmount').value);
+            const lireAmount = euroAmount * 1936.27; // Conversion rate approximated
+            document.getElementById('euroToLireResult').innerText = lireAmount.toFixed(2) + " Lire Italiane";
+        }
+
+        function convertLireToEuro() {
+            const lireAmount = parseInt(document.getElementById('lireAmount').value);
+            const euroAmount = lireAmount / 1936.27; // Conversion rate approximated
+            document.getElementById('lireToEuroResult').innerText = euroAmount.toFixed(2) + " Euro";
+        }function setTheme(theme) {
+            document.body.className = theme;
+        }
+
+        function showCalculator(calculatorId) {
+            const calculators = document.querySelectorAll('.calculator');
+            calculators.forEach(calculator => {
+                if (calculator.id === calculatorId) {
+                    calculator.classList.add('active');
+                } else {
+                    calculator.classList.remove('active');
+                }
+            });
+
+            const buttons = document.querySelectorAll('.menu button');
+            buttons.forEach(button => {
+                if (button.id === calculatorId + 'Btn') {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function convertEuroToLire() {
+            const euroAmount = parseFloat(document.getElementById('euroAmount').value);
+            const lireAmount = euroAmount * 1936.27; // Conversion rate approximated
+            document.getElementById('euroToLireResult').innerText = lireAmount.toFixed(2) + " Lire Italiane";
+        }
+
+        function convertLireToEuro() {
+            const lireAmount = parseInt(document.getElementById('lireAmount').value);
+            const euroAmount = lireAmount / 1936.27; // Conversion rate approximated
+            document.getElementById('lireToEuroResult').innerText = euroAmount.toFixed(2) + " Euro";
+        }
