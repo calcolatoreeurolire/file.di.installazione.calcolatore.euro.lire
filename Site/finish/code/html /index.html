@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head><script defer src="https://progressier.app/fzGa42940oK3nzMfcRoO/script.js"></script><
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertitore Euro-Lire</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes themeChange {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        :root {
+            --bg-color: #fff;
+            --text-color: #333;
+            --button-bg: #007BFF;
+            --button-text: #fff;
+            --button-bg-hover: #0056b3;
+            --button-bg-active: #0056b3;
+        }
+
+        .theme-white {
+            --bg-color: #fff;
+            --text-color: #333;
+            --button-bg: #007BFF;
+            --button-text: #fff;
+            --button-bg-hover: #0056b3;
+            --button-bg-active: #0056b3;
+        }
+
+        .theme-blackwhite {
+            --bg-color: #000;
+            --text-color: #fff;
+            --button-bg: #333;
+            --button-text: #fff;
+            --button-bg-hover: #444;
+            --button-bg-active: #555;
+        }
+
+        .theme-red {
+            --bg-color: #ffebeb;
+            --text-color: #b30000;
+            --button-bg: #b30000;
+            --button-text: #fff;
+            --button-bg-hover: #990000;
+            --button-bg-active: #7f0000;
+        }
+
+        .theme-green {
+            --bg-color: #eaffea;
+            --text-color: #006600;
+            --button-bg: #006600;
+            --button-text: #fff;
+            --button-bg-hover: #005700;
+            --button-bg-active: #004d00;
+        }
+
+        .theme-blue {
+            --bg-color: #e7f2ff;
+            --text-color: #003399;
+            --button-bg: #003399;
+            --button-text: #fff;
+            --button-bg-hover: #002b80;
+            --button-bg-active: #002266;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .menu button {
+            padding: 10px 20px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .menu button:hover {
+            background-color: var(--button-bg-hover);
+            transform: scale(1.1);
+        }
+
+        .menu button.active {
+            background-color: var(--button-bg-active);
+        }
+
+        .calculator {
+            display: none;
+            opacity: 0;
+        }
+
+        .calculator.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+            opacity: 1;
+        }
+
+        .calculator h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--button-bg);
+        }
+
+        .calculator label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        .calculator input[type="number"], .calculator input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .calculator input:focus {
+            border-color: var(--button-bg);
+            outline: none;
+        }
+
+        .calculator button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .calculator button:hover {
+            background-color: var(--button-bg-hover);
+            transform: scale(1.05);
+        }
+
+        .calculator .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .theme-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-selector div {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .theme-selector div:hover {
+            transform: scale(1.2);
+            border-color: var(--button-bg);
+        }
+
+        .theme-white { background-color: #fff; }
+        .theme-blackwhite { background-color: #000; }
+        .theme-red { background-color: #ff0000; }
+        .theme-green { background-color: #00ff00; }
+        .theme-blue { background-color: #0000ff; }
+
+        .theme-icon {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .theme-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .theme-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .calculator h1 {
+                font-size: 20px;
+            }
+
+            .calculator input {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .calculator button {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .calculator .result {
+                font-size: 18px;
+            }
+
+            .theme-selector {
+                top: 5px;
+                right: 5px;
+                gap: 5px;
+            }
+
+            .theme-selector div {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-white">
+    <div class="theme-selector">
+        <div class="theme-icon" onclick="setTheme('theme-white')"><img src="https://img.icons8.com/color/48/000000/sun--v1.png" alt="Tema Bianco"></div>
+        <div class="theme-icon" onclick="setTheme('theme-blackwhite')"><img src="https://images.glamour.it/gallery/62042/Big/8a25c92d-dfea-43e0-b592-b3d2efa57fa4.jpeg" alt="Tema Bianco e Nero"></div>
+        <div class="theme-icon" onclick="setTheme('theme-red')"><img src="https://img.icons8.com/color/48/000000/filled-circle.png" style="background-color:#ff0000;" alt="Tema Rosso"></div>
+        <div class="theme-icon" onclick="setTheme('theme-green')"><img src="https://img.icons8.com/color/48/000000/filled-circle.png" style="background-color:#00ff00;" alt="Tema Verde"></div>
+        <div class="theme-icon" onclick="setTheme('theme-blue')"><img src="https://img.icons8.com/color/48/000000/filled-circle.png" style="background-color:#0000ff;" alt="Tema Blu"></div>
+    </div>
+
+    <div class="container">
+        <div class="menu">
+            <button id="euroToLireBtn" class="active" onclick="showCalculator('euroToLire')">Convertitore da Euro a Lire</button>
+            <button id="lireToEuroBtn" onclick="showCalculator('lireToEuro')">Convertitore da Lire a Euro</button>
+        </div>
+
+        <div id="euroToLire" class="calculator active">
+            <h1>Convertitore da Euro a Lire</h1>
+            <label for="euroAmount">Inserisci l'importo in Euro:</label>
+            <input type="number" id="euroAmount" placeholder="0.00" step="0.01">
+            <button onclick="convertEuroToLire()">Converti</button>
+            <div class="result" id="euroToLireResult"></div>
+        </div>
+        
+        <div id="lireToEuro" class="calculator">
+            <h1>Convertitore da Lire a Euro</h1>
+            <label for="lireAmount">Inserisci l'importo in Lire:</label>
+            <input type="number" id="lireAmount" placeholder="0" step="1">
+            <button onclick="convertLireToEuro()">Converti</button>
+            <div class="result" id="lireToEuroResult"></div>
+        </div>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            document.body.className = theme;
+        }
+
+        function showCalculator(calculatorId) {
+            const calculators = document.querySelectorAll('.calculator');
+            calculators.forEach(calculator => {
+                if (calculator.id === calculatorId) {
+                    calculator.classList.add('active');
+                } else {
+                    calculator.classList.remove('active');
+                }
+            });
+
+            const buttons = document.querySelectorAll('.menu button');
+            buttons.forEach(button => {
+                if (button.id === calculatorId + 'Btn') {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function convertEuroToLire() {
+            const euroAmount = parseFloat(document.getElementById('euroAmount').value);
+            const lireAmount = euroAmount * 1936.27; // Conversion rate approximated
+            document.getElementById('euroToLireResult').innerText = lireAmount.toFixed(2) + " Lire Italiane";
+        }
+
+        function convertLireToEuro() {
+            const lireAmount = parseInt(document.getElementById('lireAmount').value);
+            const euroAmount = lireAmount / 1936.27; // Conversion rate approximated
+            document.getElementById('lireToEuroResult').innerText = euroAmount.toFixed(2) + " Euro";
+        }
+    </script>
+</body>
+</html>
