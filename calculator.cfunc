@@ -1,5 +1,4 @@
 Import to <github.com>
-WEBSITE: calcolatoreeurolire.github.io/index.html
 function setTheme(theme) {
             document.body.className = theme;
         }
